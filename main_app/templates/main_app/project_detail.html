@@ -1,0 +1,14 @@
+{% extends 'main_app/base.html' %}
+
+{% block content %}
+
+    {{ project.project_name }}
+    
+    Description: {{ project.description }}
+    Tech Stack: {{ project.tech_stack }}
+    {% if project.link %}
+        View Repository/Demo
+    {% endif %}
+    ← Back to Projects
+
+{% endblock %}

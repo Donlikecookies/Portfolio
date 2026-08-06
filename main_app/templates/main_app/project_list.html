@@ -1,0 +1,17 @@
+{% extends 'main_app/base.html' %}
+
+{% block content %}
+Projects
+
+    {% for project in projects %}
+        
+            
+            
+                {{ project.project_name }}
+            
+        
+    {% empty %}
+        No projects available.
+    {% endfor %}
+
+{% endblock %}
