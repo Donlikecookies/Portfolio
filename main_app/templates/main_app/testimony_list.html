@@ -1,0 +1,16 @@
+{% extends 'main_app/base.html' %}
+{% block content %}
+
+    Testimonials
+    + Leave Testimony
+
+
+    {% for testimony in testimonies %}
+        
+            {{ testimony.full_name }}
+        
+    {% empty %}
+        No testimonials yet.
+    {% endfor %}
+
+{% endblock %}
