@@ -5,7 +5,9 @@
     {{ project.project_name }}
     
     Description: {{ project.description }}
-    Tech Stack: {{ project.tech_stack }}
+    Tech Stack: {% for stack in project.tech_stacks.all %}
+    {{ stack.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
     {% if project.link %}
         View Repository/Demo
     {% endif %}

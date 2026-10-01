@@ -1,12 +1,29 @@
 {% extends 'main_app/base.html' %}
+{% block title %}About Me{% endblock %}
 
 {% block content %}
-
-    {{ info.first_name }} {% if info.middle_name %}{{ info.middle_name }} {% endif %}{{ info.last_name }}
-    
-    Summary: {{ info.summary }}
-    Email: {{ info.email }}
-    Contact Number: {{ info.contact_number }}
-    Address: {{ info.address }}
-
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card p-5 shadow-sm border-0" style="background: linear-gradient(to bottom right, #ffffff, #f7f3ee);">
+            <div class="card-body">
+                {% if info %}
+                    <h1 class="display-5 fw-bold mb-3" style="color: #2c221e;">{{ info.full_name }}</h1>
+                    <hr class="w-25 mb-4" style="background-color: #c49a6c; height: 3px; opacity: 1;">
+                    <p class="lead text-muted mb-4" style="line-height: 1.8;">{{ info.bio }}</p>
+                    
+                    <div class="bg-light p-4 rounded-3 border-start border-4 border-secondary mt-4">
+                        <h5 class="mb-3">Get in Touch</h5>
+                        <p class="mb-1"><strong>Email:</strong> {{ info.email }}</p>
+                        <p class="mb-0"><strong>Contact Number:</strong> {{ info.contact_number }}</p>
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <h2>Welcome to My Portfolio</h2>
+                        <p class="text-muted">Personal information has not been configured yet.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
