@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
 from .models import PersonalInformation, Project, Testimony, Inquiry
 from .forms import ProjectForm, TestimonyForm
+from django.contrib import messages
 
 def personal_info_view(request):
     info = PersonalInformation.objects.first()
@@ -20,6 +21,7 @@ def project_create_view(request):
         form = ProjectForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Success! Your new project has been added.")
             return redirect('project_list')
     else:
         form = ProjectForm()
@@ -35,18 +37,20 @@ def contact_view(request):
             address=request.POST.get('address'),
             message=request.POST.get('message')
         )
-        return render(request, 'main_app/contact.html', {'submitted': True})
+        messages.success(request, "Thank you! Your inquiry has been sent.")
+        return redirect('contact') # Redirect to prevent duplicate submissions
     return render(request, 'main_app/contact.html')
 
-def testimony_create_view(request):
+def project_create_view(request):
     if request.method == 'POST':
-        form = TestimonyForm(request.POST)
+        form = ProjectForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('testimony_list')
+            messages.success(request, "Success! Your new project has been added.")
+            return redirect('project_list')
     else:
-        form = TestimonyForm()
-    return render(request, 'main_app/testimony_form.html', {'form': form})
+        form = ProjectForm()
+    return render(request, 'main_app/project_form.html', {'form': form})
 
 
 # 3b. List Testimonies: CLASS-BASED LIST VIEW (CBV)
