@@ -1,0 +1,154 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+{% block extrastyle %}
+<!-- Google Fonts to match frontend typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --wood-dark: #3b271a;
+        --wood-medium: #5c3a21;
+        --wood-light: #70533e;
+        --wood-accent: #c49a6c;
+        --wood-cream: #fbf9f5;
+        --card-bg: #ffffff;
+    }
+
+    /* Overall Layout & Typography Overrides */
+    body {
+        background-color: var(--wood-cream) !important;
+        color: #332924 !important;
+        font-family: 'Inter', sans-serif !important;
+    }
+
+    #container {
+        background: transparent !important;
+        border: none !important;
+    }
+
+    /* Header Makeover */
+    #header {
+        background: var(--wood-dark) !important;
+        color: #f2e3d5 !important;
+        border-bottom: 4px solid var(--wood-medium);
+        padding: 15px 25px;
+        box-shadow: 0 4px 12px rgba(59, 39, 26, 0.15);
+    }
+
+    #header a:link, #header a:visited {
+        color: #f2e3d5 !important;
+        font-family: 'Inter', sans-serif;
+    }
+
+    #branding h1 span, #site-name a {
+        font-family: 'Playfair Display', serif !important;
+        font-size: 1.5rem !important;
+        color: var(--wood-accent) !important;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+    }
+
+    /* Breadcrumbs styling */
+    div.breadcrumbs {
+        background-color: var(--wood-medium) !important;
+        color: #f2e3d5 !important;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    div.breadcrumbs a {
+        color: var(--wood-accent) !important;
+    }
+
+    /* Content Area & Modules (Transforming blocks into modern cards) */
+    #content {
+        padding: 30px !important;
+    }
+
+    .module {
+        background: var(--card-bg) !important;
+        border-radius: 12px !important;
+        border: 1px solid #eae2d9 !important;
+        box-shadow: 0 6px 15px rgba(74, 55, 40, 0.04) !important;
+        margin-bottom: 25px !important;
+        overflow: hidden;
+    }
+
+    .module h2, .module caption, .inline-group h2 {
+        background: var(--wood-medium) !important;
+        color: #ffffff !important;
+        font-family: 'Playfair Display', serif !important;
+        padding: 12px 18px !important;
+        font-size: 1.1rem !important;
+        letter-spacing: 0.02em;
+    }
+
+    /* Table & List Styling inside Admin */
+    table {
+        width: 100% !important;
+        border-collapse: separate !important;
+        border-spacing: 0;
+    }
+
+    th {
+        background-color: #f4efe6 !important;
+        color: var(--wood-dark) !important;
+        font-weight: 600 !important;
+        border-bottom: 2px solid #e2d5c7 !important;
+    }
+
+    td, th {
+        padding: 12px 15px !important;
+    }
+
+    tr:nth-child(even) {
+        background-color: #fcfbfa;
+    }
+
+    /* Buttons & Actions */
+    .button, input[type=submit], input[type=button], .submit-row input, a.button {
+        background: var(--wood-medium) !important;
+        color: #ffffff !important;
+        border-radius: 8px !important;
+        border: none !important;
+        padding: 8px 16px !important;
+        font-weight: 500 !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+        transition: background 0.2s ease;
+    }
+
+    .button:hover, input[type=submit]:hover {
+        background: var(--wood-light) !important;
+    }
+
+    .button.default, input[type=submit].default {
+        background: var(--wood-dark) !important;
+    }
+
+    /* Sidebar / Recent Actions panel layout */
+    #content-related {
+        background: #f4efe6;
+        border-radius: 12px;
+        padding: 20px;
+        border: 1px solid #e2d5c7;
+    }
+
+    #content-related h2 {
+        color: var(--wood-dark);
+        font-family: 'Playfair Display', serif;
+        border-bottom: 2px solid var(--wood-accent);
+        padding-bottom: 8px;
+    }
+</style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Portfolio Management Console</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

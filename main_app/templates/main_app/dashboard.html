@@ -1,0 +1,84 @@
+{% extends 'main_app/base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Admin Dashboard</h1>
+
+    <!-- Projects Table Section -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Projects</h3>
+        <a href="{% url 'project_create' %}" class="btn btn-primary">+ Add Project</a>
+    </div>
+    <div class="table-responsive mb-5">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Project Name</th>
+                    <th>Description</th>
+                    <th>Tech Stacks</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                <tr>
+                    <td>{{ project.project_name }}</td>
+                    <td>{{ project.description|truncatechars:50 }}</td>
+                    <td>
+                        {% for stack in project.tech_stacks.all %}
+                            {{ stack.name }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            None
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% if project.link %}
+                            <a href="{{ project.link }}" target="_blank">View Project</a>
+                        {% else %}
+                            No Link
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4" class="text-center">No projects found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Tech Stacks Table Section -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Tech Stacks</h3>
+        <a href="{% url 'add_tech_stack' %}" class="btn btn-success">+ Add Tech Stack</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Tech Stack Name</th>
+                    <th>Projects It Was Used In</th>
+                    <th>Date Added</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stack in tech_stacks %}
+                <tr>
+                    <td>{{ stack.name }}</td>
+                    <td>
+                        {% for project in stack.projects.all %}
+                            {{ project.project_name }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            Not used yet
+                        {% endfor %}
+                    </td>
+                    <td>{{ stack.created_at|date:"M d, Y" }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="3" class="text-center">No tech stacks found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
